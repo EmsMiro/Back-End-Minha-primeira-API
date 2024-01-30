@@ -10,11 +10,6 @@ app.use(express.json()) // tratando os dados que vão trafegar a partir da requi
 
 const porta = 3333 //criando a porta
 
-app.use((req, res, next) => {
-    console.log(req.body);
-    next();
-  });
-
 // criando lista incial de mulheres
 const listaMulheres = [
 
