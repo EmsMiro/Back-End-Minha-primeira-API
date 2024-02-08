@@ -59,12 +59,31 @@ function criaMulher(request, response) {
     response.json(listaMulheres)
 }
 
+// PATCH
+
+function corrigeMulher (request, response) {
+    function encontraMulher (mulher) {
+        if(mulher.id === request.params.id) {
+            return mulher
+        };
+    };
+
+    const mulherEncontrada = listaMulheres.find(encontraMulher)
+
+    if(request.body.nome) {mulherEncontrada.nome = request.body.nome};
+    if(request.body.imagem) {mulherEncontrada.imagem = request.body.imagem};
+    if(request.body.minibio) {mulherEncontrada.minibio = request.body.minibio}
+
+    response.json(listaMulheres);
+}
+
 // função mostra a porta
 function mostraPorta() {
     console.log("Servidor criado e rodando na porta ", porta)
 }
 
 
-app.use(router.get('/mulheres', mostraMulheres)) // segunda parte da configuração da rota - usando GET 
-app.use(router.post('/mulheres', criaMulher)) // 2ª parte da config. da rota - usando POST
+app.use(router.get('/mulheres', mostraMulheres)) // segunda parte da configuração da rota - usando GET para '/mulheres'
+app.use(router.post('/mulheres', criaMulher)) // 2ª parte da config. da rota - usando POST para '/mulheres'
+app.use(router.patch('/mulheres/:id', corrigeMulher)) // 2ª parte da config. da rota - usando PATCH para '/mulheres:id'
 app.listen(porta, mostraPorta) //servidor ouvindo a porta
