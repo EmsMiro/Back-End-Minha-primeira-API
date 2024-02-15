@@ -4,6 +4,8 @@ const router = express.Router() //configurando a primeira parte da rota
 
 const { v4: uuidv4 } = require('uuid'); //iniciando a biblioteca uuid
 
+const conectaBancoDeDados = require ('./bancoDeDados'); // importando o módulo de conexão do banco de dados
+conectaBancoDeDados() // chamando a função para rodar o banco de dados
 
 const app = express()//iniciando o app
 app.use(express.json()) // tratando os dados que vão trafegar a partir da requisição em formato Jsoon
